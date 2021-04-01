@@ -1,8 +1,7 @@
 
 import WeatherDisplay from './weatherDisplay'
 
-const Weather = ({ weather }) => {
-    console.log("weather", weather)
+const Weather = () => {
     return (
         <table className="table table-hover mt-5">
             <thead>
@@ -14,7 +13,7 @@ const Weather = ({ weather }) => {
                 </tr>
             </thead>
             <tbody>
-                <WeatherDisplay cityData={weather}/>
+                <WeatherDisplay />
             </tbody>
         </table>
     )

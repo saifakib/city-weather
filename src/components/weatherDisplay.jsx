@@ -1,32 +1,37 @@
+
+import { useContext } from 'react'
 import GoogleMap from './google_map'
 import Chat from './chat'
+import { WeatherContext } from '../App'
 
-const WeatherDisplay = (props) => {
 
-    console.log(props)
+const WeatherDisplay = () => {
 
-    const { cityData } = props;
-    
-    let temperatures = cityData.list.map(temp => temp.main.temp)
-    const pressures = cityData.list.map(pres => pres.main.pressure)
-    const humidity = cityData.list.map(humi => humi.main.humidity)
-    const { lat, lng } = cityData.city.coord
+    const { data } = useContext(WeatherContext)
+
+    let temperatures = data.list.map(tem => tem.main.temp)
+    const pressures = data.list.map(pres => pres.main.pressure)
+    const humidity = data.list.map(humi => humi.main.humidity)
+    const { lat, lng } = data.city.coord
 
     return (
-        <tr key={cityData.city.name}>
-            <td>
-                <GoogleMap lat={lat} lng={lng} />
-            </td>
-            <td>
-                <Chat data={temperatures} color="blue" units="K" />
-            </td>
-            <td>
-                <Chat data={pressures} color="orange" units="hPa" />
-            </td>
-            <td>
-                <Chat data={humidity} color="red" units="%" />
-            </td>
-        </tr>
+        <>
+            <tr key={data.city.name}>
+                <td>
+                    <GoogleMap lat={lat} lng={lng} />
+                </td>
+                <td>
+                    <Chat data={temperatures} color="blue" units="K" />
+                </td>
+                <td>
+                    <Chat data={pressures} color="orange" units="hPa" />
+                </td>
+                <td>
+                    <Chat data={humidity} color="red" units="%" />
+                </td>
+            </tr>
+        </>
+
     )
 }
 
