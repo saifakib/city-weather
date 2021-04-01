@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from './utils/axios'
+import axios from 'axios'
 import './App.css';
 //import querystring from 'querystring'
 
@@ -17,19 +17,16 @@ function App() {
   let ROOT_URL = `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}&q=`;
 
   useEffect(() => {
-    console.log(search);
-  }, [search])
-
-
-  useEffect(() => {
+    console.log(search)
     fetchingData()
-  }, [search])
+  },[search])
 
   const fetchingData = async () => {
     try{
       let result = await axios.get(getProperUrl())
-      console.log(result)
-      setData(result.data)
+      const resultData = result.data
+      setData(resultData)
+      console.log("result:",data)
       
     } catch(e) {
       console.log(e)
